@@ -4,56 +4,60 @@
 ------------------------------------------------------- */
 // Middleware: permissions
 
+const CustomError = require("../errors/customError");
+
 module.exports = {
-
     isLogin: (req, res, next) => {
-
-        // Set Passive:
-        return next()
-
-        // any User:
-        if (req.user && req.user.isActive) {
-
-            next()
-
-        } else {
-
-            res.errorStatusCode = 403
-            throw new Error('NoPermission: You must login.')
-        }
+      if (!req.user) {
+        throw new CustomError(
+          "AuthenticationError: You must be logged in to access this resource.",
+          403,
+        );
+      }
+      if (!req.user?.isActive) {
+        throw new CustomError(
+          "Your account is not active. Please contact support.",
+          403,
+        );
+      }
+      next();
     },
-
+    isStaffOrisAdmin: (req, res, next) => {
+      if (!(req.user?.isAdmin || req.user?.isStaff)) {
+        throw new CustomError(
+          "AuthorizationError: You must be an Admin or Staff to access this resource.",
+          403,
+        );
+      }
+      if (!req.user?.isActive) {
+        throw new CustomError(
+          "Your account is not active. Please contact support.",
+          403,
+        );
+      }
+      next();
+    },
     isAdmin: (req, res, next) => {
-
-        // Set Passive:
-        return next()
-        
-        // only Admin:
-        if (req.user && req.user.isActive && req.user.isAdmin) {
-
-            next()
-
-        } else {
-
-            res.errorStatusCode = 403
-            throw new Error('NoPermission: You must login and to be Admin.')
-        }
+      if (!req.user?.isAdmin)
+        throw new CustomError(
+          "AuthorizationError: You must be an Admin to access this resource.",
+          403,
+        );
+      if (!req.user?.isActive) {
+        throw new CustomError(
+          "Your account is not active. Please contact support.",
+          403,
+        );
+      }
+      next();
     },
-
-    isStaff: (req, res, next) => {
-
-        // Set Passive:
-        return next()
-        
-        // only Admin or Staff:
-        if (req.user && req.user.isActive && (req.user.isAdmin || req.user.isStaff)) {
-
-            next()
-
-        } else {
-
-            res.errorStatusCode = 403
-            throw new Error('NoPermission: You must login and to be Staff.')
-        }
+    isActive: (req, res, next) => {
+      if (!req.user?.isActive) {
+        throw new CustomError(
+          "Your account is not active. Please contact support.",
+          403,
+        );
+      }
     },
-}
+  };
+  
