@@ -11,10 +11,13 @@ const jwt = require("jsonwebtoken");
 module.exports = {
     login: async (req, res) => {
   
-      const { username, password } = req.body;
+      const { username, email, password } = req.body;
   
-      if (username && password) {
-        const user = await User.findOne({ username });
+      if ((username || email) && password) {
+        const user = await User.findOne({ $or: [
+          { username: username },
+          { email: email }
+        ] });
   
         if (user && user.password == passwordEncrypt(password)) {
           if (user.isActive) {
@@ -61,11 +64,11 @@ module.exports = {
           }
         } else {
           res.errorStatusCode = 401;
-          throw new Error("Wrong username or password.");
+          throw new Error("Wrong username/email or password.");
         }
       } else {
         res.errorStatusCode = 401;
-        throw new Error("Please enter username and password.");
+        throw new Error("Please enter username/email and password.");
       }
     },
   
