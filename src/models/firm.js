@@ -19,7 +19,7 @@ const FirmSchema = new mongoose.Schema(
         trim: true,
         required: true
     },
-    adress: {
+    address: {
         type: String,
         trim: true,
         required: true

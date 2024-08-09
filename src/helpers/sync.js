@@ -10,11 +10,11 @@ module.exports = async function () {
 
     /* REMOVE DATABASE *
     const { mongoose } = require('../configs/dbConnection')
-    await mongoose.connection.dropDatabase()
-    console.log('- Database and all data DELETED!')
+    // await mongoose.connection.dropDatabase()
+    // console.log('- Database and all data DELETED!')
     /* REMOVE DATABASE */
 
-    /* User */
+    /* User *
     const User = require('../models/user')
     await User.deleteMany() // !!! Clear collection.
     await User.create({
@@ -177,7 +177,7 @@ module.exports = async function () {
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f333",
-        "name": "ÜLker",
+        "name": "Ülker",
         "phone": "2124445566",
         "image": "https://www.ulker.com.tr/documents/ulker-logo.png",
         "address": "Kısıklı, Ferah Cd. No:1, 34692 Üsküdar/İstanbul, Türkiye"
