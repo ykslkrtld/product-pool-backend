@@ -10,6 +10,19 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
     login: async (req, res) => {
+      /*
+            #swagger.tags = ["Authentication"]
+            #swagger.summary = "Login"
+            #swagger.description = 'Login with username (or email) and password for get simpleToken and JWT'
+            #swagger.parameters["body"] = {
+                in: "body",
+                required: true,
+                schema: {
+                    "username": "test",
+                    "password": "1234",
+                }
+            }
+      */
   
       const { username, email, password } = req.body;
   
@@ -73,6 +86,20 @@ module.exports = {
     },
   
     refresh: async (req, res) => {
+      /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'JWT: Refresh'
+            #swagger.description = 'Refresh accessToken with refreshToken'
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                    bearer: {
+                        refresh: '...refreshToken...'
+                    }
+                }
+            }
+      */
   
       const refreshToken = req.body?.bearer?.refresh;
   
@@ -123,6 +150,11 @@ module.exports = {
     },
   
     logout: async (req, res) => {
+      /*
+            #swagger.tags = ["Authentication"]
+            #swagger.summary = "SimpleToken: Logout"
+            #swagger.description = 'Delete token key.'
+      */
   
       const auth = req.headers?.authorization || null; // Token ...tokenKey...
       const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...tokenKey...']

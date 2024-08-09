@@ -1,6 +1,6 @@
 {
   "title": "Stock Management API",
-  "name": "stockapi",
+  "name": "ProductPool",
   "version": "1.0.0",
   "description": "Stock Management System",
   "main": "index.js",

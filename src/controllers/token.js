@@ -8,6 +8,7 @@ const Token = require('../models/token')
 module.exports = {
 
     list: async (req, res) => {
+         // #swagger.ignore = true
         const data = await res.getModelList(Token)
 
         res.status(200).send({
@@ -18,6 +19,7 @@ module.exports = {
     },
 
     create: async (req, res) => {
+         // #swagger.ignore = true
         const data = await Token.create(req.body)
 
         res.status(201).send({
@@ -28,6 +30,7 @@ module.exports = {
     },
 
     read: async (req, res) => {
+         // #swagger.ignore = true
         const data = await Token.findOne({ _id: req.params.id })
 
         res.status(200).send({
@@ -38,6 +41,7 @@ module.exports = {
     },
 
     update: async (req, res) => {
+         // #swagger.ignore = true
         const data = await Token.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
 
         res.status(202).send({
@@ -49,6 +53,7 @@ module.exports = {
     },
 
     delete: async (req, res) => {
+         // #swagger.ignore = true
         const data = await Token.deleteOne({ _id: req.params.id })
 
         res.status(data.deletedCount ? 204 : 404).send({

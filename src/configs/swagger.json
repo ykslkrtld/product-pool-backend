@@ -40,13 +40,13 @@
     "application/json"
   ],
   "paths": {
-    "/account/auth/login": {
+    "/auth/login": {
       "post": {
         "tags": [
           "Authentication"
         ],
         "summary": "Login",
-        "description": "Login with username (or email) and password.",
+        "description": "Login with username (or email) and password for get simpleToken and JWT",
         "parameters": [
           {
             "name": "body",
@@ -74,24 +74,47 @@
         }
       }
     },
-    "/account/auth/logout": {
-      "get": {
+    "/auth/refresh": {
+      "post": {
         "tags": [
           "Authentication"
         ],
-        "summary": "Logout",
-        "description": "Delete token key.",
+        "summary": "JWT: Refresh",
+        "description": "Refresh accessToken with  ",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bearer": {
+                  "type": "object",
+                  "properties": {
+                    "refresh": {
+                      "type": "string",
+                      "example": "...refreshToken..."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           }
         }
-      },
-      "post": {
+      }
+    },
+    "/auth/logout": {
+      "get": {
         "tags": [
           "Authentication"
         ],
-        "summary": "Logout",
+        "summary": "SimpleToken: Logout",
         "description": "Delete token key.",
         "responses": {
           "200": {
@@ -125,29 +148,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "isActive": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "isAdmin": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+              "$ref": "#/definitions/User"
             }
           }
         ],
@@ -197,35 +198,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "isActive": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "isAdmin": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+              "$ref": "#/definitions/User"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -270,40 +249,18 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "isActive": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "isAdmin": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+              "$ref": "#/definitions/User"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       }
     },
-    "/stock/brands/": {
+    "/brands/": {
       "get": {
         "tags": [
           "Brands"
@@ -320,7 +277,7 @@
         "tags": [
           "Brands"
         ],
-        "summary": "Create Brand",
+        "summary": "Create Brands",
         "description": "",
         "parameters": [
           {
@@ -339,7 +296,7 @@
         }
       }
     },
-    "/stock/brands/{id}": {
+    "/brands/{id}": {
       "get": {
         "tags": [
           "Brands"
@@ -383,8 +340,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -434,13 +391,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       }
     },
-    "/stock/categories/": {
+    "/categories/": {
       "get": {
         "tags": [
           "Categories"
@@ -476,7 +433,7 @@
         }
       }
     },
-    "/stock/categories/{id}": {
+    "/categories/{id}": {
       "get": {
         "tags": [
           "Categories"
@@ -520,8 +477,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -571,13 +528,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       }
     },
-    "/stock/firms/": {
+    "/firms/": {
       "get": {
         "tags": [
           "Firms"
@@ -613,7 +570,7 @@
         }
       }
     },
-    "/stock/firms/{id}": {
+    "/firms/{id}": {
       "get": {
         "tags": [
           "Firms"
@@ -657,8 +614,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -666,7 +623,7 @@
         "tags": [
           "Firms"
         ],
-        "summary": "Delete Firm",
+        "summary": "Get Single Firm",
         "description": "",
         "parameters": [
           {
@@ -708,13 +665,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       }
     },
-    "/stock/products/": {
+    "/products/": {
       "get": {
         "tags": [
           "Products"
@@ -750,7 +707,7 @@
         }
       }
     },
-    "/stock/products/{id}": {
+    "/products/{id}": {
       "get": {
         "tags": [
           "Products"
@@ -775,7 +732,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Update Product",
+        "summary": "Create Product",
         "description": "",
         "parameters": [
           {
@@ -794,8 +751,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -803,7 +760,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Delete Product",
+        "summary": "Get Single Product",
         "description": "",
         "parameters": [
           {
@@ -826,7 +783,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Update Product",
+        "summary": "Create Product",
         "description": "",
         "parameters": [
           {
@@ -845,13 +802,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       }
     },
-    "/stock/purchases/": {
+    "/purchases/": {
       "get": {
         "tags": [
           "Purchases"
@@ -887,7 +844,7 @@
         }
       }
     },
-    "/stock/purchases/{id}": {
+    "/purchases/{id}": {
       "get": {
         "tags": [
           "Purchases"
@@ -912,7 +869,7 @@
         "tags": [
           "Purchases"
         ],
-        "summary": "Update Purchase",
+        "summary": "Create Purchase",
         "description": "",
         "parameters": [
           {
@@ -931,8 +888,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -940,7 +897,7 @@
         "tags": [
           "Purchases"
         ],
-        "summary": "Delete Purchase",
+        "summary": "Get Single Purchase",
         "description": "",
         "parameters": [
           {
@@ -963,7 +920,7 @@
         "tags": [
           "Purchases"
         ],
-        "summary": "Update Purchase",
+        "summary": "Create Purchase",
         "description": "",
         "parameters": [
           {
@@ -982,13 +939,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       }
     },
-    "/stock/sales/": {
+    "/sales/": {
       "get": {
         "tags": [
           "Sales"
@@ -1024,7 +981,7 @@
         }
       }
     },
-    "/stock/sales/{id}": {
+    "/sales/{id}": {
       "get": {
         "tags": [
           "Sales"
@@ -1049,7 +1006,7 @@
         "tags": [
           "Sales"
         ],
-        "summary": "Update Sale",
+        "summary": "Create Sale",
         "description": "",
         "parameters": [
           {
@@ -1068,8 +1025,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -1077,7 +1034,7 @@
         "tags": [
           "Sales"
         ],
-        "summary": "Delete Sale",
+        "summary": "Get Single Sale",
         "description": "",
         "parameters": [
           {
@@ -1100,7 +1057,7 @@
         "tags": [
           "Sales"
         ],
-        "summary": "Update Sale",
+        "summary": "Create Sale",
         "description": "",
         "parameters": [
           {
@@ -1119,8 +1076,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       }
@@ -1163,6 +1120,9 @@
             "required": {
               "type": "boolean",
               "example": true
+            },
+            "set": {
+              "type": "function"
             }
           }
         },
@@ -1177,12 +1137,28 @@
               "example": true
             },
             "required": {
-              "type": "boolean",
-              "example": true
+              "type": "array",
+              "example": [
+                true,
+                "An Email address is required"
+              ],
+              "items": {
+                "type": "string"
+              }
             },
             "unique": {
               "type": "boolean",
               "example": true
+            },
+            "validate": {
+              "type": "array",
+              "example": [
+                null,
+                "Email format is not valid"
+              ],
+              "items": {
+                "type": "string"
+              }
             }
           }
         },
@@ -1288,6 +1264,10 @@
             "trim": {
               "type": "boolean",
               "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
             }
           }
         }
@@ -1350,6 +1330,10 @@
             "trim": {
               "type": "boolean",
               "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
@@ -1362,6 +1346,10 @@
             "trim": {
               "type": "boolean",
               "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
@@ -1372,6 +1360,10 @@
               "type": "function"
             },
             "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
               "type": "boolean",
               "example": true
             }
@@ -1427,18 +1419,22 @@
             "required": {
               "type": "boolean",
               "example": true
+            },
+            "unique": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
-        "quantity": {
+        "stock": {
           "type": "object",
           "properties": {
             "type": {
               "type": "function"
             },
-            "default": {
-              "type": "number",
-              "example": 0
+            "required": {
+              "type": "boolean",
+              "example": true
             }
           }
         }
@@ -1479,22 +1475,6 @@
             }
           }
         },
-        "brandId": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "function"
-            },
-            "ref": {
-              "type": "string",
-              "example": "Brand"
-            },
-            "required": {
-              "type": "boolean",
-              "example": true
-            }
-          }
-        },
         "productId": {
           "type": "object",
           "properties": {
@@ -1511,15 +1491,31 @@
             }
           }
         },
+        "brandId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "Brand"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
         "quantity": {
           "type": "object",
           "properties": {
             "type": {
               "type": "function"
             },
-            "default": {
-              "type": "number",
-              "example": 0
+            "required": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
@@ -1529,9 +1525,9 @@
             "type": {
               "type": "function"
             },
-            "default": {
-              "type": "number",
-              "example": 0
+            "required": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
@@ -1540,10 +1536,6 @@
           "properties": {
             "type": {
               "type": "function"
-            },
-            "default": {
-              "type": "number",
-              "example": 0
             }
           }
         }
@@ -1568,22 +1560,6 @@
             }
           }
         },
-        "brandId": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "function"
-            },
-            "ref": {
-              "type": "string",
-              "example": "Brand"
-            },
-            "required": {
-              "type": "boolean",
-              "example": true
-            }
-          }
-        },
         "productId": {
           "type": "object",
           "properties": {
@@ -1600,15 +1576,31 @@
             }
           }
         },
+        "brandId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "Brand"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
         "quantity": {
           "type": "object",
           "properties": {
             "type": {
               "type": "function"
             },
-            "default": {
-              "type": "number",
-              "example": 0
+            "required": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
@@ -1618,9 +1610,9 @@
             "type": {
               "type": "function"
             },
-            "default": {
-              "type": "number",
-              "example": 0
+            "required": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
@@ -1629,10 +1621,6 @@
           "properties": {
             "type": {
               "type": "function"
-            },
-            "default": {
-              "type": "number",
-              "example": 0
             }
           }
         }
