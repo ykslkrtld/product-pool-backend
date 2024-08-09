@@ -36,7 +36,10 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Firm"
+                    "name": "Firm 1",
+                     "phone": "999 88 77",
+                     "address": "Address",
+                     "image": "http://imageURL"
                 }
             }
         */
@@ -67,7 +70,10 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Firm"
+                    "name": "Firm 1",
+                     "phone": "999 88 77",
+                     "address": "Address",
+                     "image": "http://imageURL"
                 }
             }
         */

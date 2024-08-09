@@ -36,7 +36,8 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Brand"
+                    "name": "Brand 1",
+                    "image": "http://imageURL"
                 }
             }
         */
@@ -67,7 +68,8 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Brand"
+                    "name": "Brand 1",
+                    "image": "http://imageURL"
                 }
             }
         */

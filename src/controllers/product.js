@@ -36,7 +36,9 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Product"
+                    "categoryId": "65343222b67e9681f937f203",
+                    "brandId": "65343222b67e9681f937f107",
+                    "name": "Product 1"
                 }
             }
         */
@@ -67,7 +69,9 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Product"
+                    "categoryId": "65343222b67e9681f937f203",
+                    "brandId": "65343222b67e9681f937f107",
+                    "name": "Product 1"
                 }
             }
         */

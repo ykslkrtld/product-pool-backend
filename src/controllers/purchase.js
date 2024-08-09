@@ -36,7 +36,12 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Purchase"
+                    "userId": "65343223gg4e9681f937f107",
+                    "firmId": "65343222b67e9681f937f304",
+                    "brandId": "65343222b67e9681f937f107",
+                    "productId": "65343222b67e9681f937f422",
+                    "quantity": 1,
+                    "price": 9.99
                 }
             }
         */
@@ -67,7 +72,12 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Purchase"
+                    "userId": "65343223gg4e9681f937f107",
+                    "firmId": "65343222b67e9681f937f304",
+                    "brandId": "65343222b67e9681f937f107",
+                    "productId": "65343222b67e9681f937f422",
+                    "quantity": 1,
+                    "price": 9.99
                 }
             }
         */

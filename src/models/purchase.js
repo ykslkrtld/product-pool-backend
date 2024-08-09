@@ -38,7 +38,6 @@ const PurchaseSchema = new mongoose.Schema(
     },
     priceTotal: {
         type: Number,
-        // required: true
     }
     },
     { collection: "purchases", timestamps: true },

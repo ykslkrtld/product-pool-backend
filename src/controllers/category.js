@@ -36,7 +36,7 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Category"
+                   "name": "Category 1"
                 }
             }
         */
@@ -66,8 +66,8 @@ module.exports = {
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
-               schema: {
-                   $ref:"#/definitions/Category"
+                schema: {
+                   "name": "Category 1"
                 }
             }
         */

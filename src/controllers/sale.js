@@ -36,8 +36,12 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Sale"
-                }
+                    "userId": "65343223gg4e9681f937f107",
+                    "brandId": "65343222b67e9681f937f107",
+                    "productId": "65343222b67e9681f937f422",
+                    "quantity": 1,
+                    "price": 9.99
+                },
             }
         */
         const data = await Sale.create(req.body)
@@ -67,7 +71,11 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/Sale"
+                    "userId": "65343223gg4e9681f937f107",
+                    "brandId": "65343222b67e9681f937f107",
+                    "productId": "65343222b67e9681f937f422",
+                    "quantity": 1,
+                    "price": 9.99
                 }
             }
         */

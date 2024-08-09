@@ -33,7 +33,6 @@ const SaleSchema = new mongoose.Schema(
     },
     priceTotal: {
         type: Number,
-        // required: true
     }
     },
     { collection: "sales", timestamps: true },

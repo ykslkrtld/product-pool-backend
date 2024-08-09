@@ -148,7 +148,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "test"
+                }
+              }
             }
           }
         ],
@@ -198,7 +220,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "test"
+                }
+              }
             }
           }
         ],
@@ -249,7 +293,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "test"
+                }
+              }
             }
           }
         ],
@@ -285,7 +351,17 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Brand"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "http://imageURL"
+                }
+              }
             }
           }
         ],
@@ -335,7 +411,17 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Brand"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "http://imageURL"
+                }
+              }
             }
           }
         ],
@@ -386,7 +472,17 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Brand"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "http://imageURL"
+                }
+              }
             }
           }
         ],
@@ -422,7 +518,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Category"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category 1"
+                }
+              }
             }
           }
         ],
@@ -472,7 +574,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Category"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category 1"
+                }
+              }
             }
           }
         ],
@@ -523,7 +631,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Category"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category 1"
+                }
+              }
             }
           }
         ],
@@ -559,7 +673,25 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Firm"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Firm 1"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "999 88 77"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Address"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "http://imageURL"
+                }
+              }
             }
           }
         ],
@@ -609,7 +741,25 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Firm"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Firm 1"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "999 88 77"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Address"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "http://imageURL"
+                }
+              }
             }
           }
         ],
@@ -660,7 +810,25 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Firm"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Firm 1"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "999 88 77"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Address"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "http://imageURL"
+                }
+              }
             }
           }
         ],
@@ -696,7 +864,21 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Product"
+              "type": "object",
+              "properties": {
+                "categoryId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f203"
+                },
+                "brandId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f107"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Product 1"
+                }
+              }
             }
           }
         ],
@@ -746,7 +928,21 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Product"
+              "type": "object",
+              "properties": {
+                "categoryId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f203"
+                },
+                "brandId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f107"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Product 1"
+                }
+              }
             }
           }
         ],
@@ -797,7 +993,21 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Product"
+              "type": "object",
+              "properties": {
+                "categoryId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f203"
+                },
+                "brandId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f107"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Product 1"
+                }
+              }
             }
           }
         ],
@@ -833,7 +1043,33 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Purchase"
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "65343223gg4e9681f937f107"
+                },
+                "firmId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f304"
+                },
+                "brandId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f107"
+                },
+                "productId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f422"
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 1
+                },
+                "price": {
+                  "type": "number",
+                  "example": 9.99
+                }
+              }
             }
           }
         ],
@@ -883,7 +1119,33 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Purchase"
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "65343223gg4e9681f937f107"
+                },
+                "firmId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f304"
+                },
+                "brandId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f107"
+                },
+                "productId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f422"
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 1
+                },
+                "price": {
+                  "type": "number",
+                  "example": 9.99
+                }
+              }
             }
           }
         ],
@@ -934,7 +1196,33 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Purchase"
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "65343223gg4e9681f937f107"
+                },
+                "firmId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f304"
+                },
+                "brandId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f107"
+                },
+                "productId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f422"
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 1
+                },
+                "price": {
+                  "type": "number",
+                  "example": 9.99
+                }
+              }
             }
           }
         ],
@@ -970,7 +1258,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Sale"
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "65343223gg4e9681f937f107"
+                },
+                "brandId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f107"
+                },
+                "productId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f422"
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 1
+                },
+                "price": {
+                  "type": "number",
+                  "example": 9.99
+                }
+              }
             }
           }
         ],
@@ -1020,7 +1330,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Sale"
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "65343223gg4e9681f937f107"
+                },
+                "brandId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f107"
+                },
+                "productId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f422"
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 1
+                },
+                "price": {
+                  "type": "number",
+                  "example": 9.99
+                }
+              }
             }
           }
         ],
@@ -1071,7 +1403,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Sale"
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "65343223gg4e9681f937f107"
+                },
+                "brandId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f107"
+                },
+                "productId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f422"
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 1
+                },
+                "price": {
+                  "type": "number",
+                  "example": 9.99
+                }
+              }
             }
           }
         ],
@@ -1431,10 +1785,6 @@
           "properties": {
             "type": {
               "type": "function"
-            },
-            "required": {
-              "type": "boolean",
-              "example": true
             }
           }
         }
