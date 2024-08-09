@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Stock Management API",
+    "title": "Product Pool API",
     "description": "Stock Management System",
     "termsOfService": "http://www.CourseName.com/#",
     "contact": {
