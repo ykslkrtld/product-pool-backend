@@ -38,11 +38,11 @@ module.exports = {
         res.status(202).send({
             error: false,
             data,
-            new: await Personnel.findOne({ _id: req.params.id }),
+            new: await User.findOne({ _id: req.params.id }),
           });
     },
     delete: async (req, res) => {
-        const data = await Personnel.deleteOne({ _id: req.params.id });
+        const data = await User.deleteOne({ _id: req.params.id });
 
         res.status(data.deletedCount ? 204 : 404).send({
           error: !data.deletedCount,
