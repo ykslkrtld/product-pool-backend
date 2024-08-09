@@ -129,6 +129,10 @@ module.exports = async function () {
         "_id": "65343222b67e9681f937f204",
         "name": "Electronic",
     })
+    await Category.create({
+        "_id": "65343222b67e9681f937f205",
+        "name": "Clothings&Shoes",
+    })        
 
     /* Firm *
     const Firm = require('../models/firm')
