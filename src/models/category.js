@@ -15,7 +15,7 @@ const CategorySchema = new mongoose.Schema(
         unique: true
     }
     },
-    { collection: "brands", timestamps: true },
+    { collection: "categories", timestamps: true },
 );
 
 

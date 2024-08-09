@@ -29,7 +29,7 @@ const ProductSchema = new mongoose.Schema(
         required: true
     }
     },
-    { collection: "firms", timestamps: true },
+    { collection: "products", timestamps: true },
 );
 
 
