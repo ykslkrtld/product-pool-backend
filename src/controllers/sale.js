@@ -29,6 +29,7 @@ module.exports = {
             data,
           });
     },
+
     create: async (req, res) => {
         /*
             #swagger.tags = ["Sales"]
@@ -45,29 +46,29 @@ module.exports = {
                 },
             }
         */
-       //set userId from logged in
-       req.body.userId = req.user._id
-       
-        req.body.amount = req.body.price * req.body.quantity
+       req.body.amount = req.body.price * req.body.quantity
 
+       // Set userId from logined user:
+        req.body.userId = req.user._id
 
-        // güncel stok bilgisini al
-        const currentProduct = await Product.findOne({_id: req.body.productId})
+        // Güncel stok bilgisini al:
+        const currentProduct = await Product.findOne({ _id: req.body.productId })
 
-        if(currentProduct.quantity >= req.body.quantity) {
-        
-        // create
-        const data = await Purchase.create(req.body)
+        if (currentProduct.quantity >= req.body.quantity) {
 
-        // satıştan sonra product addetten eksilt
-        const updateProduct = await Product.updateOne({_id: data.productId}, {$inc: {quantity: -data.quantity}})
+            // Create:
+            const data = await Sale.create(req.body)
 
-        res.status(201).send({
-            error: false,
-            data,
-          });
+            // Satıştan sonra product adetten eksilt:
+            const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { quantity: -data.quantity } })
+
+            res.status(201).send({
+                error: false,
+                data
+            })
 
         } else {
+
             res.errorStatusCode = 422
             throw new Error('There is not enough product-quantity for this sale.', { cause: { currentProduct } })
         }
@@ -85,6 +86,7 @@ module.exports = {
             data,
           });
     },
+
     update: async (req, res) => {
          /*
             #swagger.tags = ["Sales"]
@@ -105,34 +107,48 @@ module.exports = {
             req.body.amount = req.body.price * req.body.quantity
         }
 
-        if(req.body?.quantity){
-            // mevcut işlemdeki adet bilgisini al
-            const currentPurchase = await Purchase.findOne({_id: req.params.id})
-            // farkı bul
-            const difference = req.body.quantity - currentPurchase.quantity
-            // farkı producta yansıt
-            const updateProduct = await Product.updateOne({_id: currentPurchase.productId, quantity: {$gte: difference}}, {$inc: {quantity: +difference}} )
-
+        if (req.body?.quantity) {
+            // Mevcut işlemdeki adet bilgisi al:
+            const currentSale = await Sale.findOne({ _id: req.params.id })
+            // Farkı hesapla:
+            const difference = req.body.quantity - currentSale.quantity
+            // Farkı Producta yansıt:
+            const updateProduct = await Product.updateOne({ _id: currentSale.productId, quantity: { $gte: difference } }, { $inc: { quantity: -difference } })
+            // Miktar yeterli değilse hataya yönlendir:
+            if (updateProduct.modifiedCount == 0) {
+                res.errorStatusCode = 422
+                throw new Error('There is not enough product-quantity for this sale.')
+            }
+            // productId değişmemeli:
+            req.body.productId = currentSale.productId
         }
-        
-        const data = await Purchase.updateOne({ _id: req.params.id }, req.body, {runValidators: true})
+        // Update:
+        const data = await Sale.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
 
         res.status(202).send({
             error: false,
             data,
-            new: await Sale.findOne({ _id: req.params.id }),
-          });
+            new: await Sale.findOne({ _id: req.params.id })
+        })
     },
+
     delete: async (req, res) => {
            /*
             #swagger.tags = ["Sales"]
             #swagger.summary = "Get Single Sale"
         */
-        const data = await Sale.deleteOne({ _id: req.params.id });
+       // Mevcut işlemdeki adet bilgisi al:
+        const currentSale = await Sale.findOne({ _id: req.params.id })
+
+        // Delete:
+        const data = await Sale.deleteOne({ _id: req.params.id })
+
+        // Product quantity'den adeti eksilt:
+        const updateProduct = await Product.updateOne({ _id: currentSale.productId }, { $inc: { quantity: +currentSale.quantity } })
 
         res.status(data.deletedCount ? 204 : 404).send({
-          error: !data.deletedCount,
-          data,
-    });
+            error: !data.deletedCount,
+            data
+        })
     }
 }
