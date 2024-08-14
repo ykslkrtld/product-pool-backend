@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 
 const Sale = require('../models/sale')
+const Product = require('../models/product')
 
 module.exports = {
 
@@ -20,7 +21,7 @@ module.exports = {
                 </ul>
             `
         */
-        const data = await res.getModelList(Sale)
+        const data = await res.getModelList(Sale, {}, ['userId', 'brandId', 'productId'])
 
         res.status(200).send({
             error: false,
@@ -44,20 +45,40 @@ module.exports = {
                 },
             }
         */
+       //set userId from logged in
+       req.body.userId = req.user._id
+       
         req.body.amount = req.body.price * req.body.quantity
+
+
+        // güncel stok bilgisini al
+        const currentProduct = await Product.findOne({_id: req.body.productId})
+
+        if(currentProduct.quantity >= req.body.quantity) {
+        
+        // create
         const data = await Purchase.create(req.body)
+
+        // satıştan sonra product addetten eksilt
+        const updateProduct = await Product.updateOne({_id: data.productId}, {$inc: {quantity: -data.quantity}})
 
         res.status(201).send({
             error: false,
             data,
           });
+
+        } else {
+            res.errorStatusCode = 422
+            throw new Error('There is not enough product-quantity for this sale.', { cause: { currentProduct } })
+        }
     },
+
     read: async (req, res) => {
         /*
             #swagger.tags = ["Sales"]
             #swagger.summary = "Get Single Sale"
         */
-        const data = await Sale.findOne({ _id: req.params.id });
+        const data = await Sale.findOne({ _id: req.params.id }).populate(['userId', 'brandId', 'productId']);
 
         res.status(200).send({
             error: false,
@@ -82,6 +103,16 @@ module.exports = {
         */
         if (req.body.price && req.body.quantity) {
             req.body.amount = req.body.price * req.body.quantity
+        }
+
+        if(req.body?.quantity){
+            // mevcut işlemdeki adet bilgisini al
+            const currentPurchase = await Purchase.findOne({_id: req.params.id})
+            // farkı bul
+            const difference = req.body.quantity - currentPurchase.quantity
+            // farkı producta yansıt
+            const updateProduct = await Product.updateOne({_id: currentPurchase.productId, quantity: {$gte: difference}}, {$inc: {quantity: +difference}} )
+
         }
         
         const data = await Purchase.updateOne({ _id: req.params.id }, req.body, {runValidators: true})

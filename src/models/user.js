@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 const { mongoose } = require('../configs/dbConnection')
 const passwordEncrypt = require('../helpers/passwordEncrypt')
+const emailValidation = require("../helpers/emailValidation");
 
 /* ------------------------------------------------------- */
 
@@ -20,13 +21,18 @@ const UserSchema = new mongoose.Schema(
         type: String,
         trim: true,
         required: true,
+        set: (password) => passwordEncrypt(password),
     },
     email: {
         type: String,
         trim: true,
         required: true,
         unique: true,
-        index: true
+        index: true,
+        validate: [
+            (email) => emailValidation(email),
+            "Email format is not valid",
+          ],
     },
     firstName: {
         type: String,
