@@ -60,9 +60,12 @@ module.exports = {
           });
     },
     create: async (req, res) => {
-        /*
+       /*
             #swagger.tags = ["Users"]
             #swagger.summary = "Create User"
+            #swagger.description = `
+                Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.
+            `
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
@@ -98,6 +101,9 @@ module.exports = {
         /*
             #swagger.tags = ["Users"]
             #swagger.summary = "Update User"
+            #swagger.description = `
+                Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.
+            `
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,

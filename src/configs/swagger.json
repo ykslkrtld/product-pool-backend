@@ -46,7 +46,7 @@
           "Authentication"
         ],
         "summary": "Login",
-        "description": "Login with username (or email) and password for get simpleToken and JWT",
+        "description": "  Login with username (or email) and password for get simpleToken and JWT /  Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.  ",
         "parameters": [
           {
             "name": "body",
@@ -141,7 +141,7 @@
           "Users"
         ],
         "summary": "Create User",
-        "description": "",
+        "description": "  Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.  ",
         "parameters": [
           {
             "name": "body",
@@ -207,7 +207,7 @@
           "Users"
         ],
         "summary": "Update User",
-        "description": "",
+        "description": "  Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.  ",
         "parameters": [
           {
             "name": "id",
@@ -280,7 +280,7 @@
           "Users"
         ],
         "summary": "Update User",
-        "description": "",
+        "description": "  Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.  ",
         "parameters": [
           {
             "name": "id",
@@ -1458,6 +1458,10 @@
             "unique": {
               "type": "boolean",
               "example": true
+            },
+            "index": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
@@ -1474,9 +1478,6 @@
             "required": {
               "type": "boolean",
               "example": true
-            },
-            "set": {
-              "type": "function"
             }
           }
         },
@@ -1491,28 +1492,16 @@
               "example": true
             },
             "required": {
-              "type": "array",
-              "example": [
-                true,
-                "An Email address is required"
-              ],
-              "items": {
-                "type": "string"
-              }
+              "type": "boolean",
+              "example": true
             },
             "unique": {
               "type": "boolean",
               "example": true
             },
-            "validate": {
-              "type": "array",
-              "example": [
-                null,
-                "Email format is not valid"
-              ],
-              "items": {
-                "type": "string"
-              }
+            "index": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
@@ -1773,10 +1762,6 @@
             "required": {
               "type": "boolean",
               "example": true
-            },
-            "unique": {
-              "type": "boolean",
-              "example": true
             }
           }
         },
@@ -1785,6 +1770,10 @@
           "properties": {
             "type": {
               "type": "function"
+            },
+            "default": {
+              "type": "number",
+              "example": 0
             }
           }
         }
@@ -1881,7 +1870,7 @@
             }
           }
         },
-        "priceTotal": {
+        "amount": {
           "type": "object",
           "properties": {
             "type": {
@@ -1966,7 +1955,7 @@
             }
           }
         },
-        "priceTotal": {
+        "amount": {
           "type": "object",
           "properties": {
             "type": {

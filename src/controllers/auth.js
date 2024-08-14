@@ -5,15 +5,18 @@
 
 const User = require("../models/user");
 const Token = require("../models/token");
-const passwordEncrypt = require("../helpers/passwordEncrypt");
 const jwt = require("jsonwebtoken");
+const passwordEncrypt = require("../helpers/passwordEncrypt");
 
 module.exports = {
     login: async (req, res) => {
       /*
             #swagger.tags = ["Authentication"]
             #swagger.summary = "Login"
-            #swagger.description = 'Login with username (or email) and password for get simpleToken and JWT'
+            #swagger.description = `
+              Login with username (or email) and password for get simpleToken and JWT /
+              Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.
+            `
             #swagger.parameters["body"] = {
                 in: "body",
                 required: true,
