@@ -31,8 +31,8 @@ const SaleSchema = new mongoose.Schema(
         type: Number,
         required: true
     },
-    priceTotal: {
-        type: Number,
+    amount: {
+        type: Number
     }
     },
     { collection: "sales", timestamps: true },

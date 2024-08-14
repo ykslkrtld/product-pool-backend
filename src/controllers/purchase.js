@@ -45,6 +45,7 @@ module.exports = {
                 }
             }
         */
+        req.body.amount = req.body.price * req.body.quantity
         const data = await Purchase.create(req.body)
 
         res.status(201).send({
@@ -81,6 +82,10 @@ module.exports = {
                 }
             }
         */
+        if (req.body.price && req.body.quantity) {
+            req.body.amount = req.body.price * req.body.quantity
+        }
+        
         const data = await Purchase.updateOne({ _id: req.params.id }, req.body, {runValidators: true})
 
         res.status(202).send({

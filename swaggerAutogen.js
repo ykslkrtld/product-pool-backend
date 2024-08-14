@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-	EXPRESS - Personnel API
+    | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
 require('dotenv').config()
 const HOST = process.env?.HOST || '127.0.0.1'

@@ -36,8 +36,8 @@ const PurchaseSchema = new mongoose.Schema(
         type: Number,
         required: true
     },
-    priceTotal: {
-        type: Number,
+    amount: {
+        type: Number
     }
     },
     { collection: "purchases", timestamps: true },
