@@ -47,21 +47,35 @@ module.exports = {
                 }
             }
         */
-       req.body.amount = req.body.price * req.body.quantity
+       // Amount hesaplama
+    req.body.amount = req.body.price * req.body.quantity;
 
-        // Set userId from logined user:
-        req.body.userId = req.user._id
+    // Set userId from logined user:
+    req.body.userId = req.user._id;
 
-        const data = await Purchase.create(req.body)
+    let product = await Product.findOne({ _id: req.body.productId });
 
-        // Satınalma sonrası ürün adetini arttır:
-        const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { quantity: +data.quantity } })
+    // Eğer productId ve brandId eşleşiyorsa stok miktarını arttır
+    if (product.brandId.toString() === req.body.brandId) {
+        await Product.updateOne({ _id: req.body.productId }, { $inc: { stock: +req.body.quantity } });
+    } else {
+        // Eğer brandId farklıysa, yeni bir ürün oluştur
+        const newProduct = await Product.create({
+            name: product.name,
+            brandId: req.body.brandId,
+            stock: req.body.quantity,
+            categoryId: product.categoryId
+        });
+        req.body.productId = newProduct._id;
+    }
 
-        res.status(201).send({
-            error: false,
-            data
-        })
-    },
+    const data = await Purchase.create(req.body);
+
+    res.status(201).send({
+        error: false,
+        data
+    });
+},
 
     read: async (req, res) => {
         /*
@@ -77,9 +91,9 @@ module.exports = {
     },
 
     update: async (req, res) => {
-         /*
+        /*
             #swagger.tags = ["Purchases"]
-            #swagger.summary = "Create Purchase"
+            #swagger.summary = "Update Purchase"
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
@@ -93,29 +107,58 @@ module.exports = {
                 }
             }
         */
+        const currentPurchase = await Purchase.findOne({ _id: req.params.id });
+    
+        if (!currentPurchase) {
+            return res.status(404).send({
+                error: true,
+                message: "Purchase not found"
+            });
+        }
+    
+        // Amount hesaplama
         if (req.body.price && req.body.quantity) {
-            req.body.amount = req.body.price * req.body.quantity
+            req.body.amount = req.body.price * req.body.quantity;
         }
-        
-        if (req.body?.quantity) {
-            // Mevcut işlemdeki adet bilgisi al:
-            const currentPurchase = await Purchase.findOne({ _id: req.params.id })
-            // Farkı hesapla:
-            const difference = req.body.quantity - currentPurchase.quantity
-            // Farkı Producta yansıt:
-            const updateProduct = await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { quantity: +difference } })
-            // productId değişmemeli:
-            req.body.productId = currentPurchase.productId
+    
+        let product = await Product.findOne({ _id: currentPurchase.productId });
+    
+        // Eğer productId veya brandId değişmişse, eski ürünün stok bilgisini geri almak ve yeni ürünün stok bilgisini güncellemek gerekiyor
+        if (req.body.productId !== currentPurchase.productId.toString() || req.body.brandId !== product.brandId.toString()) {
+    
+            // Eski üründen quantity düş:
+            await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { stock: -currentPurchase.quantity } });
+    
+            if (req.body.productId !== currentPurchase.productId.toString()) {
+                // Yeni ürüne quantity ekle:
+                await Product.updateOne({ _id: req.body.productId }, { $inc: { stock: +req.body.quantity } });
+            } else if (req.body.brandId !== product.brandId.toString()) {
+                // Eğer brandId farklıysa, yeni bir ürün oluştur
+                const newProduct = await Product.create({
+                    name: product.name,
+                    brandId: req.body.brandId,
+                    stock: req.body.quantity,
+                    categoryId: product.categoryId
+                });
+                req.body.productId = newProduct._id;
+            }
+        } else if (req.body?.quantity) {
+            // Eğer productId veya brandId değişmediyse, sadece stok miktarını güncelle
+            const difference = req.body.quantity - currentPurchase.quantity;
+            await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { stock: +difference } });
         }
-        // Update:
-        const data = await Purchase.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
-
+    
+        // Purchase kaydını güncelle
+        const data = await Purchase.updateOne({ _id: req.params.id }, req.body, { runValidators: true });
+    
         res.status(202).send({
             error: false,
             data,
             new: await Purchase.findOne({ _id: req.params.id }).populate(['userId', 'firmId', 'brandId', 'productId'])
-        })
+        });
     },
+    
+    
 
     delete: async (req, res) => {
         /*
@@ -130,7 +173,7 @@ module.exports = {
         const data = await Purchase.deleteOne({ _id: req.params.id })
 
         // Product quantity'den adeti eksilt:
-        const updateProduct = await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { quantity: -currentPurchase.quantity } })
+        const updateProduct = await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { stock: -currentPurchase.quantity } })
 
         res.status(data.deletedCount ? 204 : 404).send({
             error: !data.deletedCount,

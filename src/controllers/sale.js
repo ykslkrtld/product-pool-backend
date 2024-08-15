@@ -54,13 +54,13 @@ module.exports = {
         // Güncel stok bilgisini al:
         const currentProduct = await Product.findOne({ _id: req.body.productId })
 
-        if (currentProduct.quantity >= req.body.quantity) {
+        if (currentProduct.stock >= req.body.quantity) {
 
             // Create:
             const data = await Sale.create(req.body)
 
             // Satıştan sonra product adetten eksilt:
-            const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { quantity: -data.quantity } })
+            const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { stock: -data.quantity } })
 
             res.status(201).send({
                 error: false,
@@ -113,7 +113,7 @@ module.exports = {
             // Farkı hesapla:
             const difference = req.body.quantity - currentSale.quantity
             // Farkı Producta yansıt:
-            const updateProduct = await Product.updateOne({ _id: currentSale.productId, quantity: { $gte: difference } }, { $inc: { quantity: -difference } })
+            const updateProduct = await Product.updateOne({ _id: currentSale.productId, stock: { $gte: difference } }, { $inc: { stock: -difference } })
             // Miktar yeterli değilse hataya yönlendir:
             if (updateProduct.modifiedCount == 0) {
                 res.errorStatusCode = 422
@@ -144,7 +144,7 @@ module.exports = {
         const data = await Sale.deleteOne({ _id: req.params.id })
 
         // Product quantity'den adeti eksilt:
-        const updateProduct = await Product.updateOne({ _id: currentSale.productId }, { $inc: { quantity: +currentSale.quantity } })
+        const updateProduct = await Product.updateOne({ _id: currentSale.productId }, { $inc: { stock: +currentSale.quantity } })
 
         res.status(data.deletedCount ? 204 : 404).send({
             error: !data.deletedCount,
