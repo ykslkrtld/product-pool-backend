@@ -87,7 +87,10 @@ module.exports = {
         res.status(202).send({
             error: false,
             data,
-            new: await Product.findOne({ _id: req.params.id }),
+            new: await Product.findOne({ _id: req.params.id }).populate([
+                { path: 'categoryId', select: 'name' }, 
+                {path: 'brandId', select: 'name'}
+            ]),
           });
     },
     delete: async (req, res) => {

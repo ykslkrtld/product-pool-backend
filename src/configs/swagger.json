@@ -1478,6 +1478,9 @@
             "required": {
               "type": "boolean",
               "example": true
+            },
+            "set": {
+              "type": "function"
             }
           }
         },
@@ -1765,7 +1768,7 @@
             }
           }
         },
-        "stock": {
+        "quantity": {
           "type": "object",
           "properties": {
             "type": {

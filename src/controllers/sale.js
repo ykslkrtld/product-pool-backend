@@ -128,7 +128,7 @@ module.exports = {
         res.status(202).send({
             error: false,
             data,
-            new: await Sale.findOne({ _id: req.params.id })
+            new: await Sale.findOne({ _id: req.params.id }).populate(['userId', 'brandId', 'productId'])
         })
     },
 
