@@ -6,6 +6,14 @@ const express = require('express')
 const app = express()
 
 /* ------------------------------------------------------- */
+
+const cors = require('cors')
+app.use(cors({
+    origin: "https://product-pool-yksl.vercel.app"
+}))
+
+/* ------------------------------------------------------- */
+
 // Required Modules:
 
 // envVariables to process.env:
