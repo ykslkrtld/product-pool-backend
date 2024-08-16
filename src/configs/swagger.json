@@ -885,6 +885,9 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1776,7 +1779,7 @@
             }
           }
         },
-        "stock": {
+        "quantity": {
           "type": "object",
           "properties": {
             "type": {
