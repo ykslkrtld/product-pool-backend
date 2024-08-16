@@ -1,4 +1,0 @@
-127.0.0.1 - - [16/Aug/2024:09:09:41 +0000] "GET /firms/ HTTP/1.1" 500 704 "-" "Thunder Client (https://www.thunderclient.com)"
-127.0.0.1 - - [16/Aug/2024:09:09:57 +0000] "GET /firms/ HTTP/1.1" 200 3168 "-" "Thunder Client (https://www.thunderclient.com)"
-127.0.0.1 - - [16/Aug/2024:09:25:26 +0000] "GET /firms/ HTTP/1.1" 200 3168 "-" "Thunder Client (https://www.thunderclient.com)"
-127.0.0.1 - - [16/Aug/2024:09:25:49 +0000] "GET /users/ HTTP/1.1" 200 1113 "-" "Thunder Client (https://www.thunderclient.com)"
