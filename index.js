@@ -8,9 +8,7 @@ const app = express()
 /* ------------------------------------------------------- */
 
 const cors = require('cors')
-app.use(cors({
-    origin: "https://product-pool-yksl.vercel.app"
-}))
+app.use(cors())
 
 /* ------------------------------------------------------- */
 
