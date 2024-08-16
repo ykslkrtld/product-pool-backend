@@ -19,6 +19,7 @@ const checkUserEmailAndPassword = function (data) {
 
     if (isEmailValidated) {
 
+        // Password Control:
         const isPasswordValidated = data.password ? /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(data.password) : true
 
         if (isPasswordValidated) {
