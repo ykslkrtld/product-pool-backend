@@ -1105,7 +1105,7 @@
         "tags": [
           "Purchases"
         ],
-        "summary": "Create Purchase",
+        "summary": "Update Purchase",
         "description": "",
         "parameters": [
           {
@@ -1152,6 +1152,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -1182,7 +1185,7 @@
         "tags": [
           "Purchases"
         ],
-        "summary": "Create Purchase",
+        "summary": "Update Purchase",
         "description": "",
         "parameters": [
           {
@@ -1229,6 +1232,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -1247,38 +1253,31 @@
         }
       },
       "post": {
-        "tags": [
-          "Sales"
-        ],
-        "summary": "Create Sale",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "userId": {
-                  "type": "string",
-                  "example": "65343223gg4e9681f937f107"
-                },
-                "brandId": {
-                  "type": "string",
-                  "example": "65343222b67e9681f937f107"
-                },
-                "productId": {
-                  "type": "string",
-                  "example": "65343222b67e9681f937f422"
-                },
-                "quantity": {
-                  "type": "number",
-                  "example": 1
+                "amount": {
+                  "example": "any"
                 },
                 "price": {
-                  "type": "number",
-                  "example": 9.99
+                  "example": "any"
+                },
+                "quantity": {
+                  "example": "any"
+                },
+                "userId": {
+                  "example": "any"
+                },
+                "productId": {
+                  "example": "any"
+                },
+                "brandId": {
+                  "example": "any"
                 }
               }
             }
@@ -1316,7 +1315,7 @@
         "tags": [
           "Sales"
         ],
-        "summary": "Create Sale",
+        "summary": "Update Sale",
         "description": "",
         "parameters": [
           {
@@ -1359,6 +1358,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -1389,7 +1394,7 @@
         "tags": [
           "Sales"
         ],
-        "summary": "Create Sale",
+        "summary": "Update Sale",
         "description": "",
         "parameters": [
           {
@@ -1432,6 +1437,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -1768,7 +1779,7 @@
             }
           }
         },
-        "quantity": {
+        "stock": {
           "type": "object",
           "properties": {
             "type": {
