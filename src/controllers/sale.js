@@ -51,12 +51,12 @@ module.exports = {
         }
     
         // Stok kontrolü:
-        if (currentProduct.stock >= req.body.quantity) {
+        if (currentProduct.quantity >= req.body.quantity) {
             // Create sale:
             const data = await Sale.create(req.body);
     
             // Satıştan sonra product adetten eksilt:
-            await Product.updateOne({ _id: currentProduct._id }, { $inc: { stock: -req.body.quantity } });
+            await Product.updateOne({ _id: currentProduct._id }, { $inc: { quantity: -req.body.quantity } });
     
             res.status(201).send({
                 error: false,
@@ -124,8 +124,8 @@ module.exports = {
         if (req.body?.quantity) {
             const difference = req.body.quantity - currentSale.quantity;
             const updateProduct = await Product.updateOne(
-                { _id: currentSale.productId, stock: { $gte: difference } },
-                { $inc: { stock: -difference } }
+                { _id: currentSale.productId, quantity: { $gte: difference } },
+                { $inc: { quantity: -difference } }
             );
             if (updateProduct.modifiedCount === 0) {
                 res.errorStatusCode = 422;
@@ -156,7 +156,7 @@ module.exports = {
         const data = await Sale.deleteOne({ _id: req.params.id })
 
         // Product quantity'den adeti eksilt:
-        const updateProduct = await Product.updateOne({ _id: currentSale.productId }, { $inc: { stock: +currentSale.quantity } })
+        const updateProduct = await Product.updateOne({ _id: currentSale.productId }, { $inc: { quantity: +currentSale.quantity } })
 
         res.status(data.deletedCount ? 204 : 404).send({
             error: !data.deletedCount,

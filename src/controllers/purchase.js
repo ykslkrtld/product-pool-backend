@@ -57,13 +57,13 @@ module.exports = {
 
     // Eğer productId ve brandId eşleşiyorsa stok miktarını arttır
     if (product.brandId.toString() === req.body.brandId) {
-        await Product.updateOne({ _id: req.body.productId }, { $inc: { stock: +req.body.quantity } });
+        await Product.updateOne({ _id: req.body.productId }, { $inc: { quantity: +req.body.quantity } });
     } else {
         // Eğer brandId farklıysa, yeni bir ürün oluştur
         const newProduct = await Product.create({
             name: product.name,
             brandId: req.body.brandId,
-            stock: req.body.quantity,
+            quantity: req.body.quantity,
             categoryId: product.categoryId
         });
         req.body.productId = newProduct._id;
@@ -127,17 +127,17 @@ module.exports = {
         if (req.body.productId !== currentPurchase.productId.toString() || req.body.brandId !== product.brandId.toString()) {
     
             // Eski üründen quantity düş:
-            await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { stock: -currentPurchase.quantity } });
+            await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { quantity: -currentPurchase.quantity } });
     
             if (req.body.productId !== currentPurchase.productId.toString()) {
                 // Yeni ürüne quantity ekle:
-                await Product.updateOne({ _id: req.body.productId }, { $inc: { stock: +req.body.quantity } });
+                await Product.updateOne({ _id: req.body.productId }, { $inc: { quantity: +req.body.quantity } });
             } else if (req.body.brandId !== product.brandId.toString()) {
                 // Eğer brandId farklıysa, yeni bir ürün oluştur
                 const newProduct = await Product.create({
                     name: product.name,
                     brandId: req.body.brandId,
-                    stock: req.body.quantity,
+                    quantity: req.body.quantity,
                     categoryId: product.categoryId
                 });
                 req.body.productId = newProduct._id;
@@ -145,7 +145,7 @@ module.exports = {
         } else if (req.body?.quantity) {
             // Eğer productId veya brandId değişmediyse, sadece stok miktarını güncelle
             const difference = req.body.quantity - currentPurchase.quantity;
-            await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { stock: +difference } });
+            await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { quantity: +difference } });
         }
     
         // Purchase kaydını güncelle
@@ -173,7 +173,7 @@ module.exports = {
         const data = await Purchase.deleteOne({ _id: req.params.id })
 
         // Product quantity'den adeti eksilt:
-        const updateProduct = await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { stock: -currentPurchase.quantity } })
+        const updateProduct = await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { quantity: -currentPurchase.quantity } })
 
         res.status(data.deletedCount ? 204 : 404).send({
             error: !data.deletedCount,
