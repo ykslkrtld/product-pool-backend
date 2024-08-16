@@ -1489,9 +1489,6 @@
             "required": {
               "type": "boolean",
               "example": true
-            },
-            "set": {
-              "type": "function"
             }
           }
         },
