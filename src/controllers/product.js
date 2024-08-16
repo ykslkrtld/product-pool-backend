@@ -46,12 +46,27 @@ module.exports = {
                 }
             }
         */
-        const data = await Product.create(req.body)
+        // Aynı name ve brandId'ye sahip bir ürün olup olmadığını kontrol et
+        const existingProduct = await Product.findOne({
+            name: req.body.name,
+            brandId: req.body.brandId
+        });
+
+        // Eğer böyle bir ürün varsa hata döndür
+        if (existingProduct) {
+            return res.status(400).send({
+                error: true,
+                message: "This product with the same name already exists under this brand.",
+            });
+        }
+
+        // Ürün yoksa yeni ürünü oluştur
+        const data = await Product.create(req.body);
 
         res.status(201).send({
             error: false,
             data,
-          });
+        });
     },
     read: async (req, res) => {
         /*
