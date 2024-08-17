@@ -91,9 +91,6 @@ module.exports = {
             });
         }
     
-        // Eski product'ın stoğunu geri yükle
-        await Product.updateOne({ _id: currentSale.productId }, { $inc: { quantity: currentSale.quantity } });
-    
         let newProduct;
     
         // Yeni `productId` ve `brandId` kontrolü
@@ -124,26 +121,27 @@ module.exports = {
         newProduct = await Product.findOne({ _id: currentSale.productId });
         }
     
-        // Yeni ürünün stoğunu kontrol et ve güncelle
+        // Yeni ürünün stoğunu kontrol et
         if (newProduct.quantity < req.body.quantity) {
-            // Stoğu geri al:
-            await Product.updateOne({ _id: currentSale.productId }, { $inc: { quantity: -currentSale.quantity } });
-    
             return res.status(422).send({
                 error: true,
                 message: "There is not enough product-quantity for this sale."
             });
-        }
-    
-        await Product.updateOne({ _id: newProduct._id }, { $inc: { quantity: -req.body.quantity } });
+    }
     
         // Eğer `price` veya `quantity` değişiyorsa `amount`'u tekrar hesapla
-        if (req.body.price && req.body.quantity) {
-            req.body.amount = req.body.price * req.body.quantity;
+        if (req.body.price || req.body.quantity) {
+            const price = req.body.price || currentSale.price; 
+            const quantity = req.body.quantity || currentSale.quantity;
+            req.body.amount = price * quantity;
         }
     
         // Güncelleme işlemi
         const data = await Sale.updateOne({ _id: req.params.id }, req.body, { runValidators: true });
+
+        // Eski product'ın stoğunu geri yükle ve yeni stoğu güncelle
+        await Product.updateOne({ _id: currentSale.productId }, { $inc: { quantity: currentSale.quantity } });
+        await Product.updateOne({ _id: newProduct._id }, { $inc: { quantity: -req.body.quantity } });
     
         res.status(202).send({
             error: false,
