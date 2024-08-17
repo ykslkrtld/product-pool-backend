@@ -7,10 +7,22 @@ const app = express()
 
 /* ------------------------------------------------------- */
 
-const cors = require('cors')
+const cors = require('cors');
+
+const allowedOrigins = [
+    'http://localhost:3000', // Frontend'in yerel geliştirme ortamı
+    'https://product-pool-yksl.vercel.app' // Prodüksiyon ortamı
+];
+
 app.use(cors({
-    origin: "https://product-pool-yksl.vercel.app"
-}))
+    origin: function(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
 
 /* ------------------------------------------------------- */
 
