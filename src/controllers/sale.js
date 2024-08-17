@@ -82,22 +82,6 @@ module.exports = {
     },
 
     update: async (req, res) => {
-        /*
-            #swagger.tags = ["Sales"]
-            #swagger.summary = "Update Sale"
-            #swagger.parameters['body'] = {
-                in: 'body',
-                required: true,
-                schema: {
-                    "userId": "65343223gg4e9681f937f107",
-                    "brandId": "65343222b67e9681f937f107",
-                    "productId": "65343222b67e9681f937f422",
-                    "quantity": 1,
-                    "price": 9.99
-                }
-            }
-        */
-        
         const currentSale = await Sale.findOne({ _id: req.params.id });
         
         if (!currentSale) {
@@ -107,41 +91,48 @@ module.exports = {
             });
         }
     
+        // Eski product'ın stoğunu geri yükle
+        await Product.updateOne({ _id: currentSale.productId }, { $inc: { quantity: currentSale.quantity } });
+    
+        let newProduct;
+    
         // Yeni `productId` ve `brandId` kontrolü
         if (req.body.productId && req.body.productId !== currentSale.productId.toString()) {
-            const newProduct = await Product.findOne({ _id: req.body.productId });
-
+            newProduct = await Product.findOne({ _id: req.body.productId });
+    
             if (!newProduct) {
                 return res.status(404).send({
                     error: true,
-                message: "Product not found"
+                    message: "Product not found"
                 });
             }
-
-        if (newProduct.brandId.toString() !== req.body.brandId) {
+    
+            if (newProduct.brandId.toString() !== req.body.brandId) {
+                return res.status(422).send({
+                    error: true,
+                    message: "The product with the specified brandId does not exist."
+                });
+            }
+        } else {
+            newProduct = await Product.findOne({ _id: currentSale.productId });
+        }
+    
+        // Yeni ürünün stoğunu kontrol et ve güncelle
+        if (newProduct.quantity < req.body.quantity) {
+            // Stoğu geri al:
+            await Product.updateOne({ _id: currentSale.productId }, { $inc: { quantity: -currentSale.quantity } });
+    
             return res.status(422).send({
                 error: true,
-                message: "The product with the specified brandId does not exist."
+                message: "There is not enough product-quantity for this sale."
             });
         }
-    }
-
+    
+        await Product.updateOne({ _id: newProduct._id }, { $inc: { quantity: -req.body.quantity } });
+    
         // Eğer `price` veya `quantity` değişiyorsa `amount`'u tekrar hesapla
         if (req.body.price && req.body.quantity) {
             req.body.amount = req.body.price * req.body.quantity;
-        }
-    
-        // Quantity farkı hesaplama ve stok güncellemesi
-        if (req.body?.quantity) {
-            const difference = req.body.quantity - currentSale.quantity;
-            const updateProduct = await Product.updateOne(
-                { _id: currentSale.productId, quantity: { $gte: difference } },
-                { $inc: { quantity: -difference } }
-            );
-            if (updateProduct.modifiedCount === 0) {
-                res.errorStatusCode = 422;
-                throw new Error("There is not enough product-quantity for this sale.");
-            }
         }
     
         // Güncelleme işlemi
@@ -153,7 +144,6 @@ module.exports = {
             new: await Sale.findOne({ _id: req.params.id }).populate(['userId', 'brandId', 'productId'])
         });
     },
-    
 
     delete: async (req, res) => {
            /*
