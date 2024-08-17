@@ -107,13 +107,24 @@ module.exports = {
             });
         }
     
-        // `productId` veya `brandId`'de değişiklik yapılmaya çalışılıyorsa hata ver:
-        if ((req.body.productId && req.body.productId !== currentSale.productId.toString()) || (req.body.brandId && req.body.brandId !== currentSale.brandId.toString())) {
-            return res.status(400).send({
+        // Yeni `productId` ve `brandId` kontrolü
+        if (req.body.productId && req.body.productId !== currentSale.productId.toString()) {
+            const newProduct = await Product.findOne({ _id: req.body.productId });
+
+            if (!newProduct) {
+                return res.status(404).send({
+                    error: true,
+                message: "Product not found"
+                });
+            }
+
+        if (newProduct.brandId.toString() !== req.body.brandId) {
+            return res.status(422).send({
                 error: true,
-                message: "Changing the productId/brandId is not allowed."
+                message: "The product with the specified brandId does not exist."
             });
         }
+    }
 
         // Eğer `price` veya `quantity` değişiyorsa `amount`'u tekrar hesapla
         if (req.body.price && req.body.quantity) {
