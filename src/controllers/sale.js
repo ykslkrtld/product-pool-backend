@@ -114,7 +114,14 @@ module.exports = {
                 });
             }
         } else {
-            newProduct = await Product.findOne({ _id: currentSale.productId });
+            // Eğer `productId` aynı kalıyorsa fakat `brandId` değiştirilmeye çalışılıyorsa hata ver
+        if (req.body.brandId && req.body.brandId !== currentSale.brandId.toString()) {
+            return res.status(422).send({
+                error: true,
+                message: "Changing the brandId is not allowed if the productId remains the same."
+            });
+        }
+        newProduct = await Product.findOne({ _id: currentSale.productId });
         }
     
         // Yeni ürünün stoğunu kontrol et ve güncelle
