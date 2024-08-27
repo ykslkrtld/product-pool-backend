@@ -74,7 +74,7 @@ module.exports = {
                 required: true,
                 schema: {
                     "username": "test",
-                    "password": "1234",
+                    "password": "Aa12345*",
                     "email": "test@site.com",
                     "firstName": "test",
                     "lastName": "test"
@@ -127,7 +127,7 @@ module.exports = {
                 required: true,
                 schema: {
                     "username": "test",
-                    "password": "1234",
+                    "password": "Aa12345*",
                     "email": "test@site.com",
                     "firstName": "test",
                     "lastName": "test"
