@@ -4,7 +4,6 @@
 ------------------------------------------------------- */
 const express = require('express')
 const app = express()
-const path = require('path')
 
 /* ------------------------------------------------------- */
 
@@ -73,12 +72,6 @@ app.all('/', (req, res) => {
 
 // Routes:
 app.use(require('./src/routes'))
-
-//swagger statics
-app.use(
-    "/swagger",
-    express.static(path.join(__dirname, "node_modules", "swagger-ui-dist"))
-  );
 
 /* ------------------------------------------------------- */
 
