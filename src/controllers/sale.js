@@ -31,6 +31,21 @@ module.exports = {
     },
 
     create: async (req, res) => {
+        /*
+            #swagger.tags = ["Sales"]
+            #swagger.summary = "Create Sale"
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                    "userId": "65343223gg4e9681f937f107",
+                    "brandId": "65343222b67e9681f937f107",
+                    "productId": "65343222b67e9681f937f422",
+                    "quantity": 1,
+                    "price": 9.99
+                }
+            }
+        */
         req.body.amount = req.body.price * req.body.quantity;
     
         // Set userId from logged-in user:
@@ -82,6 +97,21 @@ module.exports = {
     },
 
     update: async (req, res) => {
+        /*
+            #swagger.tags = ["Sales"]
+            #swagger.summary = "Create Sale"
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                    "userId": "65343223gg4e9681f937f107",
+                    "brandId": "65343222b67e9681f937f107",
+                    "productId": "65343222b67e9681f937f422",
+                    "quantity": 1,
+                    "price": 9.99
+                }
+            }
+        */
         const currentSale = await Sale.findOne({ _id: req.params.id });
         
         if (!currentSale) {

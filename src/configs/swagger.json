@@ -61,7 +61,7 @@
                 },
                 "password": {
                   "type": "string",
-                  "example": "1234"
+                  "example": "Aa12345*"
                 }
               }
             }
@@ -156,7 +156,7 @@
                 },
                 "password": {
                   "type": "string",
-                  "example": "1234"
+                  "example": "Aa12345*"
                 },
                 "email": {
                   "type": "string",
@@ -228,7 +228,7 @@
                 },
                 "password": {
                   "type": "string",
-                  "example": "1234"
+                  "example": "Aa12345*"
                 },
                 "email": {
                   "type": "string",
@@ -301,7 +301,7 @@
                 },
                 "password": {
                   "type": "string",
-                  "example": "1234"
+                  "example": "Aa12345*"
                 },
                 "email": {
                   "type": "string",
@@ -1256,31 +1256,38 @@
         }
       },
       "post": {
+        "tags": [
+          "Sales"
+        ],
+        "summary": "Create Sale",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "amount": {
-                  "example": "any"
-                },
-                "price": {
-                  "example": "any"
-                },
-                "quantity": {
-                  "example": "any"
-                },
                 "userId": {
-                  "example": "any"
-                },
-                "productId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "65343223gg4e9681f937f107"
                 },
                 "brandId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "65343222b67e9681f937f107"
+                },
+                "productId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f422"
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 1
+                },
+                "price": {
+                  "type": "number",
+                  "example": 9.99
                 }
               }
             }
@@ -1318,7 +1325,7 @@
         "tags": [
           "Sales"
         ],
-        "summary": "Update Sale",
+        "summary": "Create Sale",
         "description": "",
         "parameters": [
           {
@@ -1362,11 +1369,11 @@
           "202": {
             "description": "Accepted"
           },
-          "400": {
-            "description": "Bad Request"
-          },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
           }
         }
       },
@@ -1397,7 +1404,7 @@
         "tags": [
           "Sales"
         ],
-        "summary": "Update Sale",
+        "summary": "Create Sale",
         "description": "",
         "parameters": [
           {
@@ -1441,11 +1448,11 @@
           "202": {
             "description": "Accepted"
           },
-          "400": {
-            "description": "Bad Request"
-          },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
           }
         }
       }
