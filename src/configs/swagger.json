@@ -1255,7 +1255,7 @@
           }
         }
       },
-      "post": {
+     "post": {
         "tags": [
           "Sales"
         ],
@@ -1272,6 +1272,10 @@
                 "userId": {
                   "type": "string",
                   "example": "65343223gg4e9681f937f107"
+                },
+                "firmId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f304"
                 },
                 "brandId": {
                   "type": "string",
