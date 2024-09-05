@@ -13,7 +13,7 @@
       "name": "ISC Licence"
     }
   },
-  "host": "127.0.0.1:8000",
+  "host": "https://vercel.com/yksls-projects/product-pool-backend-9eyc",
   "basePath": "/",
   "schemes": [
     "http",
@@ -1272,10 +1272,6 @@
                 "userId": {
                   "type": "string",
                   "example": "65343223gg4e9681f937f107"
-                },
-                "firmId": {
-                  "type": "string",
-                  "example": "65343222b67e9681f937f304"
                 },
                 "brandId": {
                   "type": "string",
