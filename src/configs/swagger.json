@@ -15,10 +15,7 @@
   },
   "host": "127.0.0.1:8000",
   "basePath": "/",
-  "schemes": [
-    "http",
-    "https"
-  ],
+  "schemes": ["http", "https"],
   "securityDefinitions": {
     "Token": {
       "type": "apiKey",
@@ -33,18 +30,12 @@
       "description": "JWT Authentication * Example: <b>Bearer ...accessToken...</b>"
     }
   },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/auth/login": {
       "post": {
-        "tags": [
-          "Authentication"
-        ],
+        "tags": ["Authentication"],
         "summary": "Login",
         "description": "  Login with username (or email) and password for get simpleToken and JWT /  Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.  ",
         "parameters": [
@@ -76,9 +67,7 @@
     },
     "/auth/refresh": {
       "post": {
-        "tags": [
-          "Authentication"
-        ],
+        "tags": ["Authentication"],
         "summary": "JWT: Refresh",
         "description": "Refresh accessToken with  ",
         "parameters": [
@@ -111,9 +100,7 @@
     },
     "/auth/logout": {
       "get": {
-        "tags": [
-          "Authentication"
-        ],
+        "tags": ["Authentication"],
         "summary": "SimpleToken: Logout",
         "description": "Delete token key.",
         "responses": {
@@ -125,9 +112,7 @@
     },
     "/users/": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "List Users",
         "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
@@ -137,9 +122,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Create User",
         "description": "  Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.  ",
         "parameters": [
@@ -183,9 +166,7 @@
     },
     "/users/{id}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get Single User",
         "description": "",
         "parameters": [
@@ -203,9 +184,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Update User",
         "description": "  Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.  ",
         "parameters": [
@@ -253,9 +232,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Delete User",
         "description": "",
         "parameters": [
@@ -276,9 +253,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Update User",
         "description": "  Password Format Type: It must has min.1 lowercase, min.1 uppercase, min.1 number, min.1 specialChars and min.8 TotalChars.  ",
         "parameters": [
@@ -328,9 +303,7 @@
     },
     "/brands/": {
       "get": {
-        "tags": [
-          "Brands"
-        ],
+        "tags": ["Brands"],
         "summary": "List Brands",
         "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
@@ -340,9 +313,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Brands"
-        ],
+        "tags": ["Brands"],
         "summary": "Create Brands",
         "description": "",
         "parameters": [
@@ -374,9 +345,7 @@
     },
     "/brands/{id}": {
       "get": {
-        "tags": [
-          "Brands"
-        ],
+        "tags": ["Brands"],
         "summary": "Get Single Brand",
         "description": "",
         "parameters": [
@@ -394,9 +363,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Brands"
-        ],
+        "tags": ["Brands"],
         "summary": "Update Brand",
         "description": "",
         "parameters": [
@@ -432,9 +399,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Brands"
-        ],
+        "tags": ["Brands"],
         "summary": "Delete Brand",
         "description": "",
         "parameters": [
@@ -455,9 +420,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Brands"
-        ],
+        "tags": ["Brands"],
         "summary": "Update Brand",
         "description": "",
         "parameters": [
@@ -495,9 +458,7 @@
     },
     "/categories/": {
       "get": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "List Categories",
         "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
@@ -507,9 +468,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Create Category",
         "description": "",
         "parameters": [
@@ -537,9 +496,7 @@
     },
     "/categories/{id}": {
       "get": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Get Single Category",
         "description": "",
         "parameters": [
@@ -557,9 +514,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Update Category",
         "description": "",
         "parameters": [
@@ -591,9 +546,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Delete Category",
         "description": "",
         "parameters": [
@@ -614,9 +567,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Update Category",
         "description": "",
         "parameters": [
@@ -650,9 +601,7 @@
     },
     "/firms/": {
       "get": {
-        "tags": [
-          "Firms"
-        ],
+        "tags": ["Firms"],
         "summary": "List Firms",
         "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
@@ -662,9 +611,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Firms"
-        ],
+        "tags": ["Firms"],
         "summary": "Create Firm",
         "description": "",
         "parameters": [
@@ -704,9 +651,7 @@
     },
     "/firms/{id}": {
       "get": {
-        "tags": [
-          "Firms"
-        ],
+        "tags": ["Firms"],
         "summary": "Get Single Firm",
         "description": "",
         "parameters": [
@@ -724,9 +669,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Firms"
-        ],
+        "tags": ["Firms"],
         "summary": "Update Firm",
         "description": "",
         "parameters": [
@@ -770,9 +713,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Firms"
-        ],
+        "tags": ["Firms"],
         "summary": "Get Single Firm",
         "description": "",
         "parameters": [
@@ -793,9 +734,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Firms"
-        ],
+        "tags": ["Firms"],
         "summary": "Update Firm",
         "description": "",
         "parameters": [
@@ -841,9 +780,7 @@
     },
     "/products/": {
       "get": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "List Products",
         "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
@@ -853,9 +790,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Create Product",
         "description": "",
         "parameters": [
@@ -894,9 +829,7 @@
     },
     "/products/{id}": {
       "get": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Get Single Product",
         "description": "",
         "parameters": [
@@ -914,9 +847,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Create Product",
         "description": "",
         "parameters": [
@@ -956,9 +887,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Get Single Product",
         "description": "",
         "parameters": [
@@ -979,9 +908,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Create Product",
         "description": "",
         "parameters": [
@@ -1023,9 +950,7 @@
     },
     "/purchases/": {
       "get": {
-        "tags": [
-          "Purchases"
-        ],
+        "tags": ["Purchases"],
         "summary": "List Purchases",
         "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
@@ -1035,9 +960,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Purchases"
-        ],
+        "tags": ["Purchases"],
         "summary": "Create Purchase",
         "description": "",
         "parameters": [
@@ -1085,9 +1008,7 @@
     },
     "/purchases/{id}": {
       "get": {
-        "tags": [
-          "Purchases"
-        ],
+        "tags": ["Purchases"],
         "summary": "Get Single Purchase",
         "description": "",
         "parameters": [
@@ -1105,9 +1026,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Purchases"
-        ],
+        "tags": ["Purchases"],
         "summary": "Update Purchase",
         "description": "",
         "parameters": [
@@ -1162,9 +1081,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Purchases"
-        ],
+        "tags": ["Purchases"],
         "summary": "Get Single Purchase",
         "description": "",
         "parameters": [
@@ -1185,9 +1102,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Purchases"
-        ],
+        "tags": ["Purchases"],
         "summary": "Update Purchase",
         "description": "",
         "parameters": [
@@ -1244,9 +1159,7 @@
     },
     "/sales/": {
       "get": {
-        "tags": [
-          "Sales"
-        ],
+        "tags": ["Sales"],
         "summary": "List Sales",
         "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
@@ -1256,9 +1169,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Sales"
-        ],
+        "tags": ["Sales"],
         "summary": "Create Sale",
         "description": "",
         "parameters": [
@@ -1302,9 +1213,7 @@
     },
     "/sales/{id}": {
       "get": {
-        "tags": [
-          "Sales"
-        ],
+        "tags": ["Sales"],
         "summary": "Get Single Sale",
         "description": "",
         "parameters": [
@@ -1322,9 +1231,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Sales"
-        ],
+        "tags": ["Sales"],
         "summary": "Create Sale",
         "description": "",
         "parameters": [
@@ -1378,9 +1285,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Sales"
-        ],
+        "tags": ["Sales"],
         "summary": "Get Single Sale",
         "description": "",
         "parameters": [
@@ -1401,9 +1306,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Sales"
-        ],
+        "tags": ["Sales"],
         "summary": "Create Sale",
         "description": "",
         "parameters": [
