@@ -23,9 +23,9 @@ router.use('/json', (req, res) => {
     res.sendFile(path.join(__dirname, '../configs/swagger.json'));
 });
 
-// Redoc:
-const redoc = require('redoc-express')
-router.use('/redoc', redoc({specUrl:'/documents/json', title:'Api docs'}))
+// // Redoc:
+// const redoc = require('redoc-express')
+// router.use('/redoc', redoc({specUrl:'/documents/json', title:'Api docs'}))
 
 // Swagger:
 const swaggerUi = require('swagger-ui-express')
