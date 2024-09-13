@@ -81,6 +81,9 @@ module.exports = {
                 }
             }
         */
+        delete req.body.isAdmin;
+        delete req.body.isStaff;
+
         // const data = await User.create(req.body)
         const data = await User.create(checkUserEmailAndPassword(req.body))
 
@@ -134,6 +137,11 @@ module.exports = {
                 }
             }
         */
+        if(!req.user.isAdmin){
+            delete req.body.isAdmin;
+            delete req.body.isStaff;
+        }
+        
         // const data = await User.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
         const data = await User.updateOne({ _id: req.params.id }, checkUserEmailAndPassword(req.body), { runValidators: true })
 
